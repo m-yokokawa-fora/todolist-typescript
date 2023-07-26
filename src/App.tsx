@@ -20,15 +20,17 @@ function App() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // OnSubmitするたびに画面がリロードされないようにする
 
+    if(inputValue === "") return;
+
     // 新しいTodoを作成
     const newTodo : Todo = {
       inputValue : inputValue,
       id : todos.length,
       checked : false
     }
-    setInputValue("");
     setTodos([newTodo, ...todos]);
-    
+    setInputValue("");
+    //document.getElementById("todoText").ariaValueText = "";
   };
 
   const handleEdit = (id: number, inputValue:string) => {
@@ -62,6 +64,7 @@ function App() {
         <h2>Todoリスト with Typescript</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input 
+            value={inputValue}
             type="text" 
             onChange={(e) => handleChange(e)} 
             className='inputText'/>
